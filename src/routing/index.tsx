@@ -4,6 +4,6 @@ import { Routes } from "./routes/Routes";
 import AuthPage from "../pages/auth";
 
 export const router = createBrowserRouter([
-  { path: Routes.Home, element: <Homepage /> },
-  { path: Routes.Auth, element: <AuthPage /> },
+  { path: Routes.Home, element: <AuthPage /> },
+  { path: Routes.Auth, element: <Homepage /> },
 ]);
