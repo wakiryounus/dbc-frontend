@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     paperRoot: {
       flex: 1,
       display: "flex",
-      borderRadius: theme.spacing(1),
+      borderRadius: `${theme.spacing(1)} !important`,
       [theme.breakpoints.up("sm")]: {
         flex: 0.5,
       },
@@ -22,10 +22,18 @@ export const useStyles = makeStyles((theme: Theme) =>
         flex: 0.8,
       },
       [theme.breakpoints.up("lg")]: {
-        flex: 0.5,
+        flex: 0.4,
       },
     },
-    welcomeMessageContainer: {
+    authContainer: {
+      backgroundColor: theme.palette.primary.main,
+      display: "flex",
+      flexDirection: "column",
+      rowGap: theme.spacing(2),
+      padding: theme.spacing(3),
+      flex: 1,
+    },
+    messageRoot: {
       flex: 1,
       background: theme.palette.secondary.main,
       textAlign: "center",
@@ -34,25 +42,20 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
     },
-    welcomeMessage: {
+    messageContainer: {
       width: "90%",
     },
     message: {
       fontWeight: `${theme.typography.fontWeightBold} !important`,
       marginBottom: `${theme.spacing(2)} !important`,
     },
-    loginContainer: {
-      backgroundColor: theme.palette.primary.main,
-      display: "flex",
-      flexDirection: "column",
-      rowGap: theme.spacing(2),
-      padding: theme.spacing(3),
-      flex: 1,
-    },
     signUp: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+    },
+    linkStyle: {
+      cursor: "pointer",
     },
   }),
 );
