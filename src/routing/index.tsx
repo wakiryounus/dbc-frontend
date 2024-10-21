@@ -5,5 +5,8 @@ import AuthPage from "../pages/auth";
 
 export const router = createBrowserRouter([
   { path: Routes.Home, element: <AuthPage /> },
-  { path: Routes.Auth, element: <Homepage /> },
+]);
+
+export const securedRouter = createBrowserRouter([
+  { path: Routes.Home, element: <Homepage /> },
 ]);

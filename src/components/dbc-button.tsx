@@ -1,10 +1,12 @@
 import React from "react";
 import { ButtonProps } from "@mui/material/Button/Button";
 import { createStyles, makeStyles } from "@mui/styles";
-import { Button, Theme } from "@mui/material";
+import { Button, CircularProgress, Theme } from "@mui/material";
 import clsx from "clsx";
 
-interface DbcButtonProps extends ButtonProps {}
+interface DbcButtonProps extends ButtonProps {
+  loading?: boolean;
+}
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,10 +20,11 @@ export const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DbcButton: React.FC<DbcButtonProps> = (props) => {
+  const { loading, children, ...rest } = props;
   const classes = useStyles();
   return (
-    <Button {...props} className={clsx(classes.root, props.className)}>
-      {props.children}
+    <Button {...rest} className={clsx(classes.root, props.className)}>
+      {!loading ? children : <CircularProgress size="25px" />}
     </Button>
   );
 };

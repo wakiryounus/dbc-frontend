@@ -18,3 +18,7 @@ export const loginUser = (data: LoginParams) => {
 export const registerUser = (data: RegisterParams) => {
   return api.post("/auth/register", data);
 };
+
+export const currentUser = () => {
+  return api.get("/auth/currentUser");
+};

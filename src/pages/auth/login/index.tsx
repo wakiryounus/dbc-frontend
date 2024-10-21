@@ -7,8 +7,13 @@ import DbcTypography from "../../../components/dbc-typography";
 import DbcLink from "../../../components/dbc-link";
 import { AuthProps } from "../index";
 import { loginUser } from "../../../api-client/auth-request";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../../data-services/user-dux";
+import { AppDispatch } from "../../../redux/store";
 const Login: React.FC<AuthProps> = ({ toggleView }) => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ username: "", password: "" });
+  const dispatch = useDispatch<AppDispatch>();
 
   const classes = useStyles();
   const theme = useTheme();
@@ -17,13 +22,16 @@ const Login: React.FC<AuthProps> = ({ toggleView }) => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleSignIn = () => {
-    console.log(data);
+    setLoading(true);
     loginUser(data)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        dispatch(userActions.loadCurrentUser());
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -46,7 +54,9 @@ const Login: React.FC<AuthProps> = ({ toggleView }) => {
             name="password"
             onChange={handleDataChange}
           />
-          <DbcButton onClick={handleSignIn}>Sign In</DbcButton>
+          <DbcButton loading={loading} onClick={handleSignIn}>
+            Sign In
+          </DbcButton>
           {!isLargeScreen ? (
             <div className={classes.signUp}>
               <DbcTypography>Don't have account?</DbcTypography>
