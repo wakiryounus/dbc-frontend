@@ -1,11 +1,11 @@
 import api from "./axios/axios";
 
-interface LoginParams {
+export interface LoginParams {
   username: string;
   password: string;
 }
 
-interface RegisterParams {
+export interface RegisterParams {
   username: string;
   email: string;
   password: string;
@@ -17,6 +17,10 @@ export const loginUser = (data: LoginParams) => {
 
 export const registerUser = (data: RegisterParams) => {
   return api.post("/auth/register", data);
+};
+
+export const logoutUser = () => {
+  return api.post("/auth/logout");
 };
 
 export const currentUser = () => {

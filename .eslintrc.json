@@ -1,0 +1,8 @@
+{
+  "extends": [],
+  "plugins": ["react-hooks"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error", // Ensures proper use of hooks
+    "react-hooks/exhaustive-deps": "error" // Ensures correct dependency array
+  }
+}

@@ -7,13 +7,13 @@ import DbcTypography from "../../../components/dbc-typography";
 import DbcLink from "../../../components/dbc-link";
 import { AuthProps } from "../index";
 import { loginUser } from "../../../api-client/auth-request";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../data-services/user-dux";
-import { AppDispatch } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 const Login: React.FC<AuthProps> = ({ toggleView }) => {
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ username: "", password: "" });
   const dispatch = useDispatch<AppDispatch>();
+  const { loading } = useSelector((state: RootState) => state.user);
 
   const classes = useStyles();
   const theme = useTheme();
@@ -22,16 +22,12 @@ const Login: React.FC<AuthProps> = ({ toggleView }) => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleSignIn = () => {
-    setLoading(true);
     loginUser(data)
       .then(() => {
         dispatch(userActions.loadCurrentUser());
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 

@@ -20,10 +20,15 @@ export const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DbcButton: React.FC<DbcButtonProps> = (props) => {
-  const { loading, children, ...rest } = props;
+  const { loading, onClick, children, ...rest } = props;
   const classes = useStyles();
   return (
-    <Button {...rest} className={clsx(classes.root, props.className)}>
+    <Button
+      {...rest}
+      onClick={!loading ? onClick : undefined}
+      disabled={loading}
+      className={clsx(classes.root, props.className)}
+    >
       {!loading ? children : <CircularProgress size="25px" />}
     </Button>
   );

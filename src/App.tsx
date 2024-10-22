@@ -1,13 +1,25 @@
 import { RouterProvider } from "react-router-dom";
 import { router, securedRouter } from "./routing";
-import { CircularProgress, ThemeProvider } from "@mui/material";
+import { Box, CircularProgress, ThemeProvider } from "@mui/material";
 import theme from "./theme";
-import { useIsAuthenticated } from "./hooks/use-is-authenticated";
+import { useIsAuthentication } from "./hooks/use-is-authentication";
 
 function App() {
-  const { isAuthenticated, isLoading } = useIsAuthenticated();
+  const { isAuthenticated, isLoading } = useIsAuthentication();
 
-  if (isLoading) return <CircularProgress size="40px" />;
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress size="40px" color="secondary" />
+      </Box>
+    );
 
   return (
     <ThemeProvider theme={theme}>
